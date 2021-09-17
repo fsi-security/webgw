@@ -121,23 +121,17 @@ Organizational Unit Name (eg, section) []:IT
 Common Name (eg, your name or your server's hostname) []:mydomain.com
 Email Address []:admin@mydomain.com
 
-$ cat cert.key cert.crt > cert.pem
+$ cat cert.key cert.crt > mitmproxy-ca.pem
 
-위 명령들의 실행결과로 다음 세개의 파일 생성
-cert.key
-cert.crt
-cert.pem
+$ cat cert.crt > mitmproxy-ca-cert.pem
 
-cert.pem파일은 private key와 인증서가 포함된 것으로
-이 파일은 mitmproxy-ca.pem 으로 변경
-
-mitmproxy-ca.pem은 다음과 같은 형식으로 구성되어 있음
+mitmproxy-ca.pem파일은 private key와 인증서를 포함하며, 다음과 같은 형식으로 구성되어 있음
 -----BEGIN CERTIFICATE-----
 -----END RSA PRIVATE KEY----- 
 -----BEGIN CERTIFICATE----- 
 -----END CERTIFICATE----- 
 
-여기서 다음의 인증서 영역만 복사하여, mitmproxy-ca-cert.pem  생성
+mitmproxy-ca-cert.pem은 인증서 파일로 다음과 같은 형식으로 구성되어 있음
 -----BEGIN CERTIFICATE----- 
 -----END RSA PRIVATE KEY-----
 ```
