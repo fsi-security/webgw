@@ -1,0 +1,14 @@
+[email]
+my_email1
+my_email2
+my_email3
+
+[account]
+my_account1
+my_account2
+my_account3
+
+[accesskey]
+my_accesskey1
+my_accesskey2
+my_accesskey3

@@ -1,0 +1,11 @@
+.aws.amazon.com
+.amazonaws.com
+.console.aws.a2z.com
+.awsapps.com
+.awsstatic.com
+.cloudfront.net
+.help-panel.docs.aws.a2z.com
+.notebook.ap-northeast-2.sagemaker.aws
+.ap-northeast-2.managed-ssh.aws.a2z.com
+c2c.amazon.com
+ap-northeast-2.signin.aws
