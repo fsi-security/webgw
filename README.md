@@ -13,7 +13,7 @@ Download Windows Installer
 2. mitmproxy 디폴트 인증서 설치 경로
 %HomePath%\.mitmproxy
 
-(참고) python3는 설치하지 않아도 됨
+(참고) python3는 설치하지 않아도 mitmproxy 실행에 문제 
 ```
 
 ### 1-2) 맥
@@ -55,7 +55,7 @@ certmgr
 
 mitmproxy-ca-cert.pem 더블클릭
 ```
-숨김파일 표시 shift + command + .
+파인더에서 숨김파일 표시 shift + command + .
 ```
 
 ![cert_mac_02](https://user-images.githubusercontent.com/90693041/133710418-3423c7bb-504e-4277-91ab-59acb9eb5f8b.png)
@@ -80,6 +80,7 @@ sudo security add-trusted-cert -d -p ssl -p basic -k /Library/Keychains/System.k
 
 ### 3-1) 브라우저(크롬)에서 프록시 연결
 크롬 Extensions에서 Proxy SwitchySharp 설치
+https://chrome.google.com/webstore/detail/proxy-switchysharp/dpplabbmogkhghncfbfdeeokoefdjegm
 
 ![proxy01](https://user-images.githubusercontent.com/90693041/133710456-09756393-940c-416a-b737-c26a9a18332a.png)
 
@@ -108,11 +109,10 @@ export AWS_CA_BUNDLE=mitmproxy-ca-cert.pem
 
 ### 3-3)Custom 인증서 생성
 ```
-openssl genrsa -out cert.key 2048 
-# (Specify the mitm domain as Common Name, e.g. \*.google.com) 
-openssl req -new -x509 -key cert.key -out cert.crt 
-cat cert.key cert.crt > cert.pem
+$ openssl genrsa -out cert.key 2048 
 
+# (Specify the mitm domain as Common Name, e.g. \*.google.com) 
+$ openssl req -new -x509 -key cert.key -out cert.crt 
 Country Name (2 letter code) [XX]:KR 
 State or Province Name (full name) []:Seoul 
 Locality Name (eg, city) [Default City]:GangNam 
@@ -121,30 +121,40 @@ Organizational Unit Name (eg, section) []:IT
 Common Name (eg, your name or your server's hostname) []:mydomain.com
 Email Address []:admin@mydomain.com
 
-위의 명령으로 파일 세개가 생성됨
-cert.crt
+$ cat cert.key cert.crt > cert.pem
+
+위 명령들의 실행결과로 다음 세개의 파일 생성
 cert.key
+cert.crt
 cert.pem
 
 cert.pem파일은 private key와 인증서가 포함된 것으로
 이 파일은 mitmproxy-ca.pem 으로 변경
-mitmproxy-ca.pem은 
+
+mitmproxy-ca.pem은 다음과 같은 형식으로 구성되어 있음
 -----BEGIN CERTIFICATE-----
 -----END RSA PRIVATE KEY----- 
 -----BEGIN CERTIFICATE----- 
 -----END CERTIFICATE----- 
 
-여기서 인증서 영역만 복사하여, mitmproxy-ca-cert.pem으로 생성
+여기서 다음의 인증서 영역만 복사하여, mitmproxy-ca-cert.pem  생성
 -----BEGIN CERTIFICATE----- 
 -----END RSA PRIVATE KEY-----
 ```
 
 ## 4. mitmproxy 실행
 ```
-(mitmproxy) CLI기반 interactive mode
-(mitmweb) WEB기반 GUI
-(mitmdump) non-interactive terminal output
-(addon 실행) mitmdump -s hello.py
+4-1) CLI기반 interactive mode
+$ mitmproxy
+
+4-2) WEB기반 GUI
+$ mitmweb
+
+4-3) non-interactive terminal output
+mitmdump
+
+4-4) addon 실행
+mitmdump -s hello.py
 ```
 
 ## 5. mitmproxy 동작 방식 이해
@@ -273,7 +283,7 @@ Access Key
 ![console02](https://user-images.githubusercontent.com/90693041/133710481-9755704a-506e-489c-bec1-56714adf9841.png)
 
 
-## 10. 아마존리눅스에서 mitmrpoxy 설치 및 실행
+## 10. 아마존리눅스에서 mitmrpoxy 설치 및 webgw.py 실행
 ```
 1. python3 설치 확인
 python3 -V
