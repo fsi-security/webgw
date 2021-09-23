@@ -10,7 +10,6 @@ authenticate_root_url = "signin.aws.amazon.com/signin"
 authenticate_root_action = "authenticateRoot"
 authenticate_iam_url = "signin.aws.amazon.com/authenticate"
 authenticate_iam_action = "iam-user-authentication"    
-allowed_domain_list = open(allowed_domain_list_file, 'r').read().split('\n')
 
 @concurrent
 def request(flow):
@@ -65,11 +64,12 @@ def response(flow):
 
 def checkAllowedDomain(host):
 
+    allowed_domain_list = open(allowed_domain_list_file, 'r').read().split('\n')
     for allowed_domain in allowed_domain_list:
         if allowed_domain.strip() == "":
             # 리스트에 blank 들어갔을 경우 allowlist가 동작하지 않는 것을 방지
             pass
-        elif allowed_domain.startswith(".") == True and allowed_domain in host:
+        elif allowed_domain.startswith(".") == True and host.endswith(allowed_domain[1:]):
             return True
         elif allowed_domain == host:
             return True
