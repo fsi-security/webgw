@@ -240,18 +240,17 @@ username: awsstudent
 
 
 ## 8. 샘플코드
-https://github.com/fsi-security/webgw
-
 허용되지 않은 도메인 또는 IP로 접근 했을 때 Remote 서버로 데이터가 전송되지 않는 것에 대한 검증 과정 필수
-
 테스트 WEB서버의 Access 로그를 통해 확인할 수 있음
 
 ### 8-1) webgw.py
+https://github.com/fsi-security/webgw/blob/main/webgw.py
 ```
 AWS Management Console 어카운트ID 접근제어 샘플
 ```
 
 ### 8-2) allowaccount.txt
+https://github.com/fsi-security/webgw/blob/main/allowaccount.txt
 ```
 각 세그먼트는 한 라인을 하나의 아이템으로 인식하며, 빈 문자열로 구분
 
@@ -266,6 +265,7 @@ Access Key
 ```
 
 ### 8-3) allowlist.txt
+https://github.com/fsi-security/webgw/blob/main/allowlist.txt
 ```
 한 라인에 하나의 도메인 입력
 - 시작 문자가 .일 경우 와일드카드 방식으로 처리되며, 해당 도메인이 포함된 host 허용
